@@ -13,7 +13,7 @@ export type FormFieldProps = {
   type: string;
   placeholder: string;
   name: ValidFieldNames;
-  register: UseFormRegister<FormData>;
+  register?: UseFormRegister<FormData>;
   error: FieldError | undefined;
   valueAsNumber?: boolean;
 };
@@ -43,7 +43,7 @@ export const UserSchema: ZodType<FormData> = z
     password: z
       .string()
       .min(8, { message: "Password is too short" })
-      .max(20, { message: "Password is too long" }),
+      .max(30, { message: "Password is too long" }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {

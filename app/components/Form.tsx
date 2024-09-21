@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchema, FormData, ValidFieldNames } from "@/types";
+import { formFieldsList } from "../data/appContentData";
 import axios from "axios";
 
 const Form = ({}) => {
@@ -13,37 +14,18 @@ const Form = ({}) => {
   } = useForm<FormData>({ resolver: zodResolver(UserSchema) });
 
   const onSubmit = async (data: FormData) => {
-    console.log("SUCCESS", data);
     try {
-      // const response = await axios.post("/api/form", data); // Make a POST request
-      // const response = await fetch("/api/form", {   method: "POST",  body:data});
-
-      const response = await fetch("/api/form", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: "Not an email",
-          githubUrl: "Not a URL",
-          yearsOfExperience: "Hello",
-          password: 1234,
-          confirmPassword: 1234,
-        }),
+      const response = await axios.post("/api/form", {
+        ...data,
       });
 
-      // const response = await axios.post("/api/form", {
-      //   email: "Not an email",
-      //   githubUrl: "Not a URL",
-      //   yearsOfExperience: "Hello",
-      //   password: 1234,
-      //   confirmPassword: 1234,
-      // });
-
-      // Destructure the 'errors' property from the response data
       const { errors = {} } = response.data;
 
-      // Define a mapping between server-side field names and their corresponding client-side names
+      // server-side field names and their corresponding client-side names
       const fieldErrorMapping: Record<string, ValidFieldNames> = {
+        firstName: "firstName",
         email: "email",
+        postcode: "postcode",
         githubUrl: "githubUrl",
         yearsOfExperience: "yearsOfExperience",
         password: "password",
@@ -55,17 +37,29 @@ const Form = ({}) => {
         (field) => errors[field]
       );
 
-      // If a field with an error is found, update the form error state using setError
+      // or better find all
+      Object.keys(fieldErrorMapping).map((field) => {
+        setError(fieldErrorMapping[field], {
+          type: "server",
+          message: errors[field],
+        });
+      });
+
       if (fieldWithError) {
-        // Use the ValidFieldNames type to ensure the correct field names
         setError(fieldErrorMapping[fieldWithError], {
           type: "server",
           message: errors[fieldWithError],
         });
       }
     } catch (error) {
-      console.log("issues!");
+      // gen API error
+      console.log("issues!", error);
     }
+  };
+  const getFieldError = (field: string) => {
+    console.log(errors);
+    console.log(field);
+    return `${field}`;
   };
 
   return (
@@ -81,13 +75,26 @@ const Form = ({}) => {
         />
 
         <FormField
+          type={formFieldsList[0].type}
+          placeholder={formFieldsList[0].name}
+          name={formFieldsList[0].name}
+          register={register}
+          error={errors.firstName}
+        />
+        <FormField
           type="text"
           placeholder="GitHub URL"
           name="githubUrl"
           register={register}
           error={errors.githubUrl}
         />
-
+        <FormField
+          type="text"
+          placeholder="Postcode"
+          name="postcode"
+          register={register}
+          error={errors.postcode}
+        />
         <FormField
           type="number"
           placeholder="Years of Experience (1 - 10)"
@@ -96,7 +103,6 @@ const Form = ({}) => {
           error={errors.yearsOfExperience}
           valueAsNumber
         />
-
         <FormField
           type="password"
           placeholder="Password"
@@ -104,7 +110,6 @@ const Form = ({}) => {
           register={register}
           error={errors.password}
         />
-
         <FormField
           type="password"
           placeholder="Confirm Password"

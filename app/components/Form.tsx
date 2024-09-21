@@ -15,6 +15,7 @@ const Form = ({}) => {
   } = useForm<FormData>({ resolver: zodResolver(UserSchema) });
 
   const onSubmit = async (data: FormData) => {
+    console.log("form data", data);
     try {
       const response = await axios.post("/api/form", {
         ...data,
@@ -24,13 +25,14 @@ const Form = ({}) => {
 
       // server-side field names and their corresponding client-side names
       const fieldErrorMapping: Record<string, ValidFieldNames> = {
+        addressLineOne: "addressLineOne",
+        addressLineTwo: "addressLineTwo",
+        city: "city",
+        // country: "country",
         firstName: "firstName",
-        email: "email",
+        lastName: "lastName",
         postcode: "postcode",
-        githubUrl: "githubUrl",
-        yearsOfExperience: "yearsOfExperience",
-        password: "password",
-        confirmPassword: "confirmPassword",
+        state: "state",
       };
 
       // Find the first field with an error in the response data
@@ -57,16 +59,31 @@ const Form = ({}) => {
       console.log("issues!", error);
     }
   };
-  const getFieldError = (field: string) => {
-    console.log(errors);
-    console.log(field);
-    return `${field}`;
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-columns-1">
         <h1>Zod & React Hook form</h1>
+
+        {/* <FormField
+          type="text"
+          placeholder="postcode"
+          name="postcode"
+          register={register}
+          error={errors.postcode}
+          label="postcode"
+          valueAsNumber={false}
+        />
+
+        <FormField
+          error={errors[formFieldsList[6].name]}
+          label={formFieldsList[6].label}
+          name={formFieldsList[6].name}
+          placeholder={formFieldsList[6].name}
+          register={register}
+          type="text"
+          valueAsNumber={false}
+        /> */}
 
         {formFieldsList &&
           formFieldsList.map((field) => {
@@ -74,74 +91,19 @@ const Form = ({}) => {
               <div key={field.id}>
                 {field.type === "text" && (
                   <FormField
-                    type={field.type}
-                    placeholder={field.name}
-                    name={field.name}
-                    register={register}
-                    error={errors.firstName}
+                    error={errors[field.name]}
                     label={field.label}
-                  />
-                )}
-                {field.type === "select" && field.options && (
-                  <InputSelect
-                    type={field.type}
-                    placeholder={field.name}
                     name={field.name}
+                    placeholder={field.placeholder}
                     register={register}
-                    error={errors.firstName}
-                    cssClasses={field.cssClasses}
-                    id={field.id}
-                    label={field.label}
-                    options={field.options}
+                    type={field.type}
+                    valueAsNumber={field.valueAsNumber}
                   />
                 )}
               </div>
             );
           })}
 
-        <FormField
-          type={formFieldsList[0].type}
-          placeholder={formFieldsList[0].name}
-          name={formFieldsList[0].name}
-          register={register}
-          error={errors.firstName}
-        />
-        <FormField
-          type="text"
-          placeholder="GitHub URL"
-          name="githubUrl"
-          register={register}
-          error={errors.githubUrl}
-        />
-        <FormField
-          type="text"
-          placeholder="Postcode"
-          name="postcode"
-          register={register}
-          error={errors.postcode}
-        />
-        <FormField
-          type="number"
-          placeholder="Years of Experience (1 - 10)"
-          name="yearsOfExperience"
-          register={register}
-          error={errors.yearsOfExperience}
-          valueAsNumber
-        />
-        <FormField
-          type="password"
-          placeholder="Password"
-          name="password"
-          register={register}
-          error={errors.password}
-        />
-        <FormField
-          type="password"
-          placeholder="Confirm Password"
-          name="confirmPassword"
-          register={register}
-          error={errors.confirmPassword}
-        />
         <button type="submit" className="submit-button">
           Submit
         </button>

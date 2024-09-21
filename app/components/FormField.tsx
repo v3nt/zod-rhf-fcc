@@ -7,15 +7,22 @@ const FormField: React.FC<FormFieldProps> = ({
   register,
   error,
   valueAsNumber,
+  label,
 }) => {
-  return (<>
-    <input
-      type={type}
-      placeholder={placeholder}
-      {...register(name, { valueAsNumber })}
-    />
-    {error && <span className="error-message">{error.message}</span>}
-  </>);
-}
+  return (
+    <>
+      <input
+        type={type}
+        placeholder={placeholder}
+        {...register(name, { valueAsNumber })}
+      />
+      {error && (
+        <span className="error-message">
+          {label} {error.message}
+        </span>
+      )}
+    </>
+  );
+};
 
 export default FormField;

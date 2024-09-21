@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 
 import { InputSelectProps } from "@/types/appTypes";
+import { SelectOption } from "@/types";
 
 export const InputSelect: FC<InputSelectProps> = ({
   id,
@@ -11,6 +12,8 @@ export const InputSelect: FC<InputSelectProps> = ({
   validationChecks,
   errors,
   name,
+  register,
+  valueAsNumber,
 }) => {
   const containerClasses = ["relative "];
   if (errors)
@@ -37,9 +40,10 @@ export const InputSelect: FC<InputSelectProps> = ({
           onChange={handleInputChange}
           required={required}
           defaultValue="GB"
+          {...register(name, { valueAsNumber })}
         >
           {options.length &&
-            options.map((item, index) => {
+            options.map((item: SelectOption, index: number) => {
               return (
                 <option value={item.optionValue} key={index}>
                   {item.label}

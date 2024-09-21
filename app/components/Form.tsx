@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchema, FormData, ValidFieldNames } from "@/types";
 import { formFieldsList } from "../data/appContentData";
 import axios from "axios";
+import { InputSelect } from "./InputSelect";
 
 const Form = ({}) => {
   const {
@@ -66,13 +67,37 @@ const Form = ({}) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-columns-1">
         <h1>Zod & React Hook form</h1>
-        <FormField
-          type="email"
-          placeholder="Email"
-          name="email"
-          register={register}
-          error={errors.email}
-        />
+
+        {formFieldsList &&
+          formFieldsList.map((field) => {
+            return (
+              <div key={field.id}>
+                {field.type === "text" && (
+                  <FormField
+                    type={field.type}
+                    placeholder={field.name}
+                    name={field.name}
+                    register={register}
+                    error={errors.firstName}
+                    label={field.label}
+                  />
+                )}
+                {field.type === "select" && field.options && (
+                  <InputSelect
+                    type={field.type}
+                    placeholder={field.name}
+                    name={field.name}
+                    register={register}
+                    error={errors.firstName}
+                    cssClasses={field.cssClasses}
+                    id={field.id}
+                    label={field.label}
+                    options={field.options}
+                  />
+                )}
+              </div>
+            );
+          })}
 
         <FormField
           type={formFieldsList[0].type}

@@ -21,27 +21,26 @@ export interface InputSelectProps
   error: FieldError | undefined;
 }
 
+export type FormData = {
+  addressLineOne: string;
+  addressLineTwo: string;
+  postcode: string;
+  stateOrCounty: string;
+  city: string;
+  firstName: string;
+  lastName: string;
+  // [key: string]: string;
+};
+
 export type FormFieldProps = {
   type: string;
   placeholder: string;
   name: string;
   label?: string;
-  register: UseFormRegister<FormData>;
+  register: UseFormRegister<FormData>; // wtf should this be
   error: FieldError | undefined;
   valueAsNumber?: boolean;
   zodConfig?: ZodConfig; // TODO: config built via main array or fields
-};
-
-// repetition of all these field names adds a lot of admin for types, form building & zod config.
-// TODO: find a way to configure all form inputs, types and zod requirements from one array
-export type FormData = {
-  addressLineOne: string;
-  addressLineTwo: string;
-  postcode: string;
-  state: string;
-  city: string;
-  firstName: string;
-  lastName: string;
 };
 
 export type ValidFieldNames =
@@ -51,9 +50,7 @@ export type ValidFieldNames =
   | "firstName"
   | "lastName"
   | "postcode"
-  | "state";
-
-const requiredFieldMessage = "Required field";
+  | "stateOrCounty";
 
 // TODO. postcode only valid for UK. Would need to use another service for changing countries.
 // Maybe one that can check if that postcode (or zipcode etc) exists
@@ -62,7 +59,7 @@ export const UserSchema: ZodType<FormData> = z.object({
   lastName: z.string().min(2, { message: "Needs at least 2 Characters" }),
   addressLineOne: z.string().min(8, { message: "Needs at least 8 Characters" }),
   addressLineTwo: z.string().min(8, { message: "Needs at least 8 Characters" }),
-  state: z.string(),
+  stateOrCounty: z.string(),
   city: z.string(),
   postcode: z
     .string()

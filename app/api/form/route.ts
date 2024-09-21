@@ -11,7 +11,9 @@ export async function POST(request: Request) {
     result.error?.issues?.map((issue) => [issue.path[0], issue.message]) || []
   );
 
-  if (result.success && !serverErrors) {
+  console.log("serverErrors", serverErrors);
+
+  if (result.success && !serverErrors.length) {
     return NextResponse.json({ success: true });
   }
 

@@ -28,11 +28,10 @@ const Form = ({}) => {
         addressLineOne: "addressLineOne",
         addressLineTwo: "addressLineTwo",
         city: "city",
-        // country: "country",
         firstName: "firstName",
         lastName: "lastName",
         postcode: "postcode",
-        state: "state",
+        stateOrCounty: "stateOrCounty",
       };
 
       // Find the first field with an error in the response data
@@ -54,6 +53,8 @@ const Form = ({}) => {
           message: errors[fieldWithError],
         });
       }
+
+      console.log("fieldErrorMapping", fieldErrorMapping);
     } catch (error) {
       // gen API error
       console.log("issues!", error);
@@ -65,7 +66,56 @@ const Form = ({}) => {
       <div className="grid grid-columns-1">
         <h1>Zod & React Hook form</h1>
 
+        {/* 
+        Hardcoded field inputs work
+         */}
+
         {/* <FormField
+          type="text"
+          placeholder="firstName"
+          name="firstName"
+          register={register}
+          error={errors.firstName}
+          label="firstName"
+          valueAsNumber={false}
+        />
+        <FormField
+          type="text"
+          placeholder="lastName"
+          name="lastName"
+          register={register}
+          error={errors.lastName}
+          label="lastName"
+          valueAsNumber={false}
+        />
+        <FormField
+          type="text"
+          placeholder="addressLineOne"
+          name="addressLineOne"
+          register={register}
+          error={errors.addressLineOne}
+          label="addressLineOne"
+          valueAsNumber={false}
+        />
+        <FormField
+          type="text"
+          placeholder="addressLineTwo"
+          name="addressLineTwo"
+          register={register}
+          error={errors.addressLineTwo}
+          label="addressLineTwo"
+          valueAsNumber={false}
+        />
+        <FormField
+          type="text"
+          placeholder="city"
+          name="city"
+          register={register}
+          error={errors.city}
+          label="city"
+          valueAsNumber={false}
+        />
+        <FormField
           type="text"
           placeholder="postcode"
           name="postcode"
@@ -76,14 +126,27 @@ const Form = ({}) => {
         />
 
         <FormField
-          error={errors[formFieldsList[6].name]}
-          label={formFieldsList[6].label}
-          name={formFieldsList[6].name}
-          placeholder={formFieldsList[6].name}
-          register={register}
           type="text"
+          placeholder="stateOrCounty"
+          name="stateOrCounty"
+          register={register}
+          error={errors.stateOrCounty}
+          label="stateOrCounty"
           valueAsNumber={false}
         /> */}
+
+        {/* <FormField
+          error={errors[formFieldsList[6].name]}
+          label={formFieldsList[6].label}
+          // effin name has to be hardcoded as string - why?!
+          name={`${formFieldsList[6].name}`}
+          placeholder={formFieldsList[6].placeholder}
+          register={register}
+          type={formFieldsList[6].type}
+          valueAsNumber={formFieldsList[6].valueAsNumber}
+        /> */}
+
+        {/* this loop doesn't register the inputs */}
 
         {formFieldsList &&
           formFieldsList.map((field) => {
@@ -93,7 +156,7 @@ const Form = ({}) => {
                   <FormField
                     error={errors[field.name]}
                     label={field.label}
-                    name={field.name}
+                    name="lastName"
                     placeholder={field.placeholder}
                     register={register}
                     type={field.type}

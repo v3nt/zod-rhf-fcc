@@ -9,18 +9,16 @@ const FormField: React.FC<FormFieldProps> = ({
   valueAsNumber,
   label,
 }) => {
+  const reg = register(name, valueAsNumber);
   return (
     <>
       <input
         type={type}
         placeholder={placeholder}
-        {...register(name, { valueAsNumber })}
+        // issues when value not a string
+        {...reg}
       />
-      {error && (
-        <span className="error-message">
-          {label} {error.message}
-        </span>
-      )}
+      {error && <span className="error-message">{error.message}</span>}
     </>
   );
 };

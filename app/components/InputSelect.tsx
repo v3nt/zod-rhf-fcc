@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
-import { InputSelectProps } from "@/types";
-import { SelectOption } from "@/types";
+import { InputSelectProps } from "@/types/appTypes";
+import { SelectOption } from "@/types/appTypes";
 
 export const InputSelect: FC<InputSelectProps> = ({
   error,
@@ -19,7 +19,7 @@ export const InputSelect: FC<InputSelectProps> = ({
     );
   const inputClasses = [""];
   inputClasses.push(
-    "bg-selectarrow bg-right bg-no-repeat bg-[length:12px_12px] bg-[right_15px_top_18px] w-full px-3 pt-4 py-3 rounded-md dark:border-gray-600 focus:outline focus:outline-primary-500 block appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+    "placeholder-opacity-50 bg-selectarrow bg-right bg-no-repeat bg-[length:12px_12px] bg-[right_15px_top_18px] w-full px-3 pt-4 py-3 rounded-md dark:border-gray-600 focus:outline focus:outline-primary-500 block appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
   );
   const labelClasses = [""];
   labelClasses.push(

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSchema, FormData, ValidFieldNames } from "@/types";
+import { UserSchema, FormData, ValidFieldNames } from "@/types/appTypes";
 import { formFieldsList } from "../data/appContentData";
 import axios from "axios";
 import InputText from "./InputText";

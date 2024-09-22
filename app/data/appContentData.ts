@@ -3,7 +3,7 @@ import { FormFields } from "@/types";
 export const formFieldsList: FormFields = [
   {
     label: "First name",
-    placeholder: "Firstname",
+    placeholder: "",
     type: "text",
     id: "firstName",
     name: "firstName",
@@ -14,7 +14,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "Lastname",
-    placeholder: "Lastname",
+    placeholder: "",
     type: "text",
     id: "lastName",
     name: "lastName",
@@ -25,7 +25,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "Address line 1",
-    placeholder: "Address line 1",
+    placeholder: " ",
     type: "text",
     id: "addressLineOne",
     name: "addressLineOne",
@@ -36,7 +36,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "Address line 2",
-    placeholder: "Address line 2",
+    placeholder: " ",
     type: "text",
     id: "addressLineTwo",
     name: "addressLineTwo",
@@ -47,7 +47,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "City",
-    placeholder: "City",
+    placeholder: "",
     type: "text",
     id: "city",
     name: "city",
@@ -58,7 +58,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "Postcode",
-    placeholder: "Postcode",
+    placeholder: "",
     type: "text",
     id: "postcode",
     name: "postcode",
@@ -70,7 +70,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "State",
-    placeholder: "state or country",
+    placeholder: "",
     type: "text",
     id: "stateOrCounty",
     name: "stateOrCounty",
@@ -81,7 +81,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "Country",
-    placeholder: "Country",
+    placeholder: "",
     type: "select",
     id: "country",
     name: "country",

@@ -136,9 +136,9 @@ const Form = ({}) => {
         /> */}
 
         {/* <FormField
+          // effin name has to be hardcoded as string - why?!
           error={errors[formFieldsList[6].name]}
           label={formFieldsList[6].label}
-          // effin name has to be hardcoded as string - why?!
           name={`${formFieldsList[6].name}`}
           placeholder={formFieldsList[6].placeholder}
           register={register}
@@ -156,7 +156,7 @@ const Form = ({}) => {
                   <FormField
                     error={errors[field.name]}
                     label={field.label}
-                    name="lastName"
+                    name={`${field.name}`}
                     placeholder={field.placeholder}
                     register={register}
                     type={field.type}

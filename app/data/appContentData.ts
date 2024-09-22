@@ -1,27 +1,4 @@
-import { FormFieldProps } from "@/types";
-
-export type FormField = {
-  cssClasses: string;
-  errors: boolean | undefined;
-  id: string;
-  label: string;
-  name: string;
-  placeholder?: string;
-  required: boolean;
-  validationChecks?: string;
-  type: string;
-  options?: selectOption[];
-  selected?: boolean;
-  valueAsNumber?: boolean;
-};
-
-interface selectOption {
-  label: string;
-  optionValue: string;
-  selected?: boolean;
-}
-
-export type FormFields = FormField[];
+import { FormFields } from "@/types";
 
 export const formFieldsList: FormFields = [
   {
@@ -32,7 +9,7 @@ export const formFieldsList: FormFields = [
     name: "firstName",
     cssClasses: "col-span-1",
     required: true,
-    errors: undefined,
+    error: undefined,
     valueAsNumber: false,
   },
   {
@@ -43,7 +20,7 @@ export const formFieldsList: FormFields = [
     name: "lastName",
     cssClasses: "col-span-1",
     required: true,
-    errors: undefined,
+    error: undefined,
     valueAsNumber: false,
   },
   {
@@ -54,7 +31,7 @@ export const formFieldsList: FormFields = [
     name: "addressLineOne",
     cssClasses: "",
     required: true,
-    errors: undefined,
+    error: undefined,
     valueAsNumber: false,
   },
   {
@@ -65,7 +42,7 @@ export const formFieldsList: FormFields = [
     name: "addressLineTwo",
     cssClasses: "",
     required: false,
-    errors: undefined,
+    error: undefined,
     valueAsNumber: false,
   },
   {
@@ -76,7 +53,7 @@ export const formFieldsList: FormFields = [
     name: "city",
     cssClasses: "col-span-1",
     required: true,
-    errors: undefined,
+    error: undefined,
     valueAsNumber: false,
   },
   {
@@ -88,7 +65,7 @@ export const formFieldsList: FormFields = [
     cssClasses: "col-span-1",
     required: true,
     validationChecks: "postcode",
-    errors: undefined,
+    error: undefined,
     valueAsNumber: false,
   },
   {
@@ -99,7 +76,7 @@ export const formFieldsList: FormFields = [
     name: "stateOrCounty",
     cssClasses: "",
     required: true,
-    errors: undefined,
+    error: undefined,
     valueAsNumber: false,
   },
   // {
@@ -110,7 +87,7 @@ export const formFieldsList: FormFields = [
   //   name: "country",
   //   cssClasses: "",
   //   required: true,
-  //   errors: undefined,
+  //   error: undefined,
   //   valueAsNumber: false,
   //   options: [
   //     { optionValue: "GB", label: "United Kingdom", selected: true },

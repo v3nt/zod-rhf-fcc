@@ -14,6 +14,23 @@ export interface SelectOption {
   selected?: boolean;
 }
 
+export type FormField = {
+  cssClasses: string;
+  error: boolean | undefined | any;
+  id: string;
+  label: string;
+  name: string;
+  placeholder?: string;
+  required: boolean;
+  validationChecks?: string;
+  type: string;
+  options?: SelectOption[];
+  selected?: boolean;
+  valueAsNumber?: boolean;
+};
+
+export type FormFields = FormField[];
+
 export interface InputSelectProps
   extends Omit<FormFieldProps, "handleInputChange"> {
   handleInputChange: (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -34,11 +51,11 @@ export type FormData = {
 
 export type FormFieldProps = {
   type: string;
-  placeholder: string;
+  placeholder?: string;
   name: string;
   label?: string;
   register: UseFormRegister<FormData>; // wtf should this be
-  error: FieldError | undefined;
+  error: any;
   valueAsNumber?: boolean;
   zodConfig?: ZodConfig; // TODO: config built via main array or fields
 };

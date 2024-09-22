@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { InputSelectProps } from "@/types/appTypes";
+import { InputSelectProps } from "@/types";
 import { SelectOption } from "@/types";
 
 export const InputSelect: FC<InputSelectProps> = ({

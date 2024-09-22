@@ -31,39 +31,39 @@ export type FormField = {
 
 export type FormFields = FormField[];
 
-export interface InputSelectProps
-  extends Omit<FormFieldProps, "handleInputChange"> {
-  handleInputChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-  options: SelectOption[];
-  error: FieldError | undefined;
-}
-
 export type FormData = {
   addressLineOne: string;
   addressLineTwo: string;
   postcode: string;
   stateOrCounty: string;
   city: string;
+  country: string;
   firstName: string;
   lastName: string;
-  // [key: string]: string;
 };
 
 export type FormFieldProps = {
-  type: string;
-  placeholder?: string;
-  name: string;
+  error: FieldError | undefined | keyof typeof FormData;
   label?: string;
+  name: string;
+  placeholder?: string;
   register: UseFormRegister<FormData>; // wtf should this be
-  error: any;
+  required?: boolean;
+  type: string;
   valueAsNumber?: boolean;
   zodConfig?: ZodConfig; // TODO: config built via main array or fields
 };
+
+export interface InputSelectProps
+  extends Omit<FormFieldProps, "handleInputChange"> {
+  options: SelectOption[];
+}
 
 export type ValidFieldNames =
   | "addressLineOne"
   | "addressLineTwo"
   | "city"
+  | "country"
   | "firstName"
   | "lastName"
   | "postcode"
@@ -78,6 +78,7 @@ export const UserSchema: ZodType<FormData> = z.object({
   addressLineTwo: z.string().min(8, { message: "Needs at least 8 Characters" }),
   stateOrCounty: z.string(),
   city: z.string(),
+  country: z.string(),
   postcode: z
     .string()
     .min(5, { message: "Needs at least 5 Characters" })

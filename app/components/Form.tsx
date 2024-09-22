@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import FormField from "./FormField";
+import InputText from "./inputText";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchema, FormData, ValidFieldNames } from "@/types";
 import { formFieldsList } from "../data/appContentData";
@@ -28,6 +28,7 @@ const Form = ({}) => {
         addressLineOne: "addressLineOne",
         addressLineTwo: "addressLineTwo",
         city: "city",
+        country: "country",
         firstName: "firstName",
         lastName: "lastName",
         postcode: "postcode",
@@ -151,9 +152,9 @@ const Form = ({}) => {
         {formFieldsList &&
           formFieldsList.map((field) => {
             return (
-              <div key={field.id}>
+              <div key={field.name}>
                 {field.type === "text" && (
-                  <FormField
+                  <InputText
                     error={errors[field.name]}
                     label={field.label}
                     name={`${field.name}`}
@@ -161,6 +162,19 @@ const Form = ({}) => {
                     register={register}
                     type={field.type}
                     valueAsNumber={field.valueAsNumber}
+                  />
+                )}
+
+                {field.type === "select" && field.options?.length && (
+                  <InputSelect
+                    error={errors[field.name]}
+                    label={field.label}
+                    name={`${field.name}`}
+                    placeholder={field.placeholder}
+                    register={register}
+                    type={field.type}
+                    valueAsNumber={field.valueAsNumber}
+                    options={field.options}
                   />
                 )}
               </div>

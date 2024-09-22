@@ -1,6 +1,6 @@
 import { FormFieldProps } from "@/types";
 
-const FormField: React.FC<FormFieldProps> = ({
+const InputText: React.FC<FormFieldProps> = ({
   type,
   placeholder,
   name,
@@ -23,4 +23,4 @@ const FormField: React.FC<FormFieldProps> = ({
   );
 };
 
-export default FormField;
+export default InputText;

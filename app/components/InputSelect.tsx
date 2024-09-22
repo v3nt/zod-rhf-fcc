@@ -4,19 +4,16 @@ import { InputSelectProps } from "@/types";
 import { SelectOption } from "@/types";
 
 export const InputSelect: FC<InputSelectProps> = ({
-  id,
   label,
   options,
   required,
-  handleInputChange,
-  validationChecks,
-  errors,
+  error,
   name,
   register,
   valueAsNumber,
 }) => {
   const containerClasses = ["relative "];
-  if (errors)
+  if (error)
     containerClasses.push(
       "[&>input]:text-red-800 [&>input]:bg-red-50 [&>input]:outline [&>input]:outline-red-200"
     );
@@ -34,10 +31,7 @@ export const InputSelect: FC<InputSelectProps> = ({
       <div className={containerClasses.join(" ")}>
         <select
           className={inputClasses.join(" ")}
-          data-validation-checks={validationChecks}
-          id={id}
-          name={name}
-          onChange={handleInputChange}
+          id={name}
           required={required}
           defaultValue="GB"
           {...register(name, { valueAsNumber })}
@@ -51,7 +45,7 @@ export const InputSelect: FC<InputSelectProps> = ({
               );
             })}
         </select>
-        <label htmlFor={id} className={labelClasses.join(" ")}>
+        <label htmlFor={name} className={labelClasses.join(" ")}>
           {label} {!required && "(optional)"}
         </label>
       </div>

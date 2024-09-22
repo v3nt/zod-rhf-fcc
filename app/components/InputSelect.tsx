@@ -4,12 +4,12 @@ import { InputSelectProps } from "@/types";
 import { SelectOption } from "@/types";
 
 export const InputSelect: FC<InputSelectProps> = ({
-  label,
-  options,
-  required,
   error,
+  label,
   name,
+  options,
   register,
+  required,
   valueAsNumber,
 }) => {
   const containerClasses = ["relative "];
@@ -32,8 +32,6 @@ export const InputSelect: FC<InputSelectProps> = ({
         <select
           className={inputClasses.join(" ")}
           id={name}
-          required={required}
-          defaultValue="GB"
           {...register(name, { valueAsNumber })}
         >
           {options.length &&

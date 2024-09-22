@@ -25,7 +25,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "Address line 1",
-    placeholder: "  ",
+    placeholder: "Address line 1",
     type: "text",
     id: "addressLineOne",
     name: "addressLineOne",
@@ -36,7 +36,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "Address line 2",
-    placeholder: "  ",
+    placeholder: "Address line 2",
     type: "text",
     id: "addressLineTwo",
     name: "addressLineTwo",
@@ -47,7 +47,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "City",
-    placeholder: "",
+    placeholder: "City",
     type: "text",
     id: "city",
     name: "city",
@@ -58,7 +58,7 @@ export const formFieldsList: FormFields = [
   },
   {
     label: "Postcode",
-    placeholder: "",
+    placeholder: "Postcode",
     type: "text",
     id: "postcode",
     name: "postcode",

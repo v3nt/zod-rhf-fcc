@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import InputText from "./inputText";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchema, FormData, ValidFieldNames } from "@/types";
 import { formFieldsList } from "../data/appContentData";
 import axios from "axios";
+import InputText from "./InputText";
 import { InputSelect } from "./InputSelect";
 
 const Form = ({}) => {
@@ -160,12 +160,13 @@ const Form = ({}) => {
                     name={`${field.name}`}
                     placeholder={field.placeholder}
                     register={register}
+                    required={field.required}
                     type={field.type}
                     valueAsNumber={field.valueAsNumber}
                   />
                 )}
 
-                {field.type === "select" && field.options?.length && (
+                {/* {field.type === "select" && field.options?.length && (
                   <InputSelect
                     error={errors[field.name]}
                     label={field.label}
@@ -176,7 +177,7 @@ const Form = ({}) => {
                     valueAsNumber={field.valueAsNumber}
                     options={field.options}
                   />
-                )}
+                )} */}
               </div>
             );
           })}

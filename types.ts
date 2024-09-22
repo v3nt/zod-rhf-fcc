@@ -33,7 +33,7 @@ export type FormFields = FormField[];
 
 export type FormData = {
   addressLineOne: string;
-  addressLineTwo: string;
+  addressLineTwo?: string;
   postcode: string;
   stateOrCounty: string;
   city: string;
@@ -75,7 +75,7 @@ export const UserSchema: ZodType<FormData> = z.object({
   firstName: z.string().min(2, { message: "Needs at least 2 Characters" }),
   lastName: z.string().min(2, { message: "Needs at least 2 Characters" }),
   addressLineOne: z.string().min(8, { message: "Needs at least 8 Characters" }),
-  addressLineTwo: z.string().min(8, { message: "Needs at least 8 Characters" }),
+  addressLineTwo: z.string().optional(),
   stateOrCounty: z.string(),
   city: z.string(),
   country: z.string(),
